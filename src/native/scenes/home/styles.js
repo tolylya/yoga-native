@@ -2,7 +2,7 @@ import { STATUSBAR_HEIGHT } from '../../constants/main';
 
 export default {
   container: {
-    marginTop: STATUSBAR_HEIGHT + 2,
+    marginTop: STATUSBAR_HEIGHT,
   },
   headerText: {
     color: 'white',
