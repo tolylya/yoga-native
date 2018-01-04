@@ -26,8 +26,13 @@ import ProfileComponent from '../components/Profile';
 
 import AboutComponent from '../components/About';
 
+import HomeContainer from '../scenes/home/HomeContainer';
+
 const Index = (
-  <Stack>
+  <Stack key="root">
+
+    <Scene key="home" hideNavBar component={HomeContainer} />
+
     <Scene hideNavBar>
       <Tabs
         key="tabbar"
