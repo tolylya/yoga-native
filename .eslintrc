@@ -18,6 +18,7 @@
     "no-nested-ternary": "off",
     "react/no-multi-comp": "off",
     "linebreak-style": "off",
-    "no-trailing-spaces": "off"
+    "no-trailing-spaces": "off",
+    "arrow-body-style": "off"
   }
 }

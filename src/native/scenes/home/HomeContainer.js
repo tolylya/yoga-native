@@ -1,34 +1,86 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import Complexes from './components/Complexes';
+import Info from './components/Info';
+import Library from './components/Library';
+import Training from './components/Training';
+
 import styles from './styles';
 
+const footerButtons = [{
+  title: 'Тренировка',
+  key: 'training',
+  icon: 'ios-body',
+}, {
+  title: 'Библиотека',
+  key: 'library',
+  icon: 'book',
+}, {
+  title: 'Комплекс',
+  key: 'complex',
+  icon: 'navigate',
+}, {
+  title: 'Инфо',
+  key: 'info',
+  icon: 'ios-information-outline',
+}];
+
 class Home extends Component {
-  state = {};
+  state = {
+    currentTab: 'complex',
+    tabName: 'Комплекс',
+  };
+
+  getContent = () => {
+    switch (this.state.currentTab) {
+      case 'complex':
+        return <Complexes />;
+
+      case 'training':
+        return <Training />;
+
+      case 'library':
+        return <Library />;
+
+      case 'info':
+        return <Info />;
+
+      default:
+        return <Complexes />;
+    }
+  };
+
+  getFooter = () => {
+    return footerButtons.map(button => (
+      <Button
+        vertical
+        active={this.state.currentTab === button.key}
+        title={button.title}
+        key={button.key}
+        onPress={() => this.openTab({ currentTab: button.key, tabName: button.title })}
+      >
+        <Icon name={button.icon} />
+        <Text style={styles.signature}>{button.title}</Text>
+      </Button>
+    ));
+  };
+
+  openTab = (tab) => {
+    this.setState(tab);
+  };
 
   render() {
     return (
       <Container style={styles.container}>
-        <Header><Text style={styles.headerText}>Header s2222xs2</Text></Header>
-        <Content />
+        <Header>
+          <Text style={styles.headerText}>{this.state.tabName}</Text>
+        </Header>
+        <Content>
+          {this.getContent()}
+        </Content>
         <Footer>
           <FooterTab>
-            <Button vertical>
-              <Icon name="ios-body" />
-              <Text style={styles.signature}>Тренировка</Text>
-            </Button>
-            <Button vertical onPress={() => Actions.cameraPage()}>
-              <Icon name="book" />
-              <Text style={styles.signature}>Библиотека</Text>
-            </Button>
-            <Button vertical active>
-              <Icon active name="navigate" />
-              <Text style={styles.signature}>Комплекс</Text>
-            </Button>
-            <Button vertical>
-              <Icon name="ios-information-outline" />
-              <Text style={styles.signature}>Инфо</Text>
-            </Button>
+            {this.getFooter()}
           </FooterTab>
         </Footer>
       </Container>
