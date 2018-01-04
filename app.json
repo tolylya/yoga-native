@@ -2,8 +2,8 @@
   "expo": {
     "version": "1.0.0",
     "sdkVersion": "22.0.0",
-    "name": "React native template",
-    "slug": "react-native-template",
+    "name": "Yoga",
+    "slug": "Yoga",
     "icon": "src/images/app-icon.png",
     "privacy": "public",
     "android": {
