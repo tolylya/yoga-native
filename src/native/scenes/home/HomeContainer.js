@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text } from 'native-base';
+import { connect } from 'react-redux';
 import Complexes from './components/Complexes';
 import Info from './components/Info';
 import Library from './components/Library';
@@ -22,9 +23,14 @@ const footerButtons = [{
 }, {
   title: 'Инфо',
   key: 'info',
-  icon: 'ios-information-outline',
+  icon: 'md-information',
 }];
 
+const mapStateToProps = state => ({
+  favorites: state.poses.favorites,
+});
+
+@connect(mapStateToProps)
 class Home extends Component {
   state = {
     currentTab: 'complex',
@@ -33,14 +39,14 @@ class Home extends Component {
 
   getContent = () => {
     switch (this.state.currentTab) {
-      case 'complex':
-        return <Complexes />;
-
       case 'training':
         return <Training />;
 
       case 'library':
-        return <Library />;
+        return <Library favorites={this.props.favorites} />;
+
+      case 'complex':
+        return <Complexes />;
 
       case 'info':
         return <Info />;

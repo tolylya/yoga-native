@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 import { Container, Right, Left, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import img from './../../../../images/yoga-p.jpg';
 import styles from '../styles';
+import poses from '../../../constants/poses';
+
 
 class Library extends Component {
+  renderPoses = () => {
+    return poses.map((pose) => {
+      return (
+        <ListItem key={pose.key} thumbnail button onPress={() => { Actions.poseDetail({ pose }); }} style={styles.listItem}>
+          <Left>
+            <Thumbnail square source={pose.image} />
+          </Left>
+          <Body>
+            <Text>{pose.title}</Text>
+            <Text note numberOfLines={2}>{pose.description}</Text>
+          </Body>
+          <Right>
+            <Icon name="arrow-forward" />
+          </Right>
+        </ListItem>
+      );
+    });
+  };
+
   render() {
     return (
       <Container>
         <Content>
           <List>
-            <ListItem thumbnail button onPress={() => { Actions.poseDetail(); }} style={styles.listItem}>
-              <Left>
-                <Thumbnail square source={img} />
-              </Left>
-              <Body>
-                <Text>Поза лотоса</Text>
-                <Text note>Очень устойчивая медитативная поза, которая оптимально...</Text>
-              </Body>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </ListItem>
+            {this.renderPoses()}
           </List>
         </Content>
       </Container>
