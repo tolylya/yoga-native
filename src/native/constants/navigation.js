@@ -1,8 +1,9 @@
 import Colors from '../../../native-base-theme/variables/commonColor';
+import { STATUSBAR_HEIGHT } from '../../../native-base-theme/variables/main';
 
 export default {
   navbarProps: {
-    navigationBarStyle: { backgroundColor: 'white' },
+    navigationBarStyle: { backgroundColor: 'red', marginTop: STATUSBAR_HEIGHT },
     titleStyle: {
       color: Colors.textColor,
       alignSelf: 'center',

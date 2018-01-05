@@ -59,7 +59,7 @@ class Home extends Component {
         key={button.key}
         onPress={() => this.openTab({ currentTab: button.key, tabName: button.title })}
       >
-        <Icon name={button.icon} />
+        <Icon name={button.icon} active={this.state.currentTab === button.key} />
         <Text style={styles.signature}>{button.title}</Text>
       </Button>
     ));
@@ -71,7 +71,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container style={styles.container}>
+      <Container>
         <Header>
           <Text style={styles.headerText}>{this.state.tabName}</Text>
         </Header>

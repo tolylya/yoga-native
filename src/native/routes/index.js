@@ -27,11 +27,13 @@ import ProfileComponent from '../components/Profile';
 import AboutComponent from '../components/About';
 
 import HomeContainer from '../scenes/home/HomeContainer';
+import PoseDetail from '../scenes/home/components/PoseDetail';
 
 const Index = (
   <Stack key="root">
 
     <Scene key="home" hideNavBar component={HomeContainer} />
+    <Scene key="poseDetail" {...DefaultProps.navbarProps} component={PoseDetail} />
 
     <Scene hideNavBar>
       <Tabs
