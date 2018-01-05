@@ -3,7 +3,7 @@ import { STATUSBAR_HEIGHT } from '../../../native-base-theme/variables/main';
 
 export default {
   navbarProps: {
-    navigationBarStyle: { backgroundColor: 'red', marginTop: STATUSBAR_HEIGHT },
+    navigationBarStyle: { backgroundColor: 'white', marginTop: STATUSBAR_HEIGHT },
     titleStyle: {
       color: Colors.textColor,
       alignSelf: 'center',
