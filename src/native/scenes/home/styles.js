@@ -1,3 +1,5 @@
+import { STATUSBAR_HEIGHT } from '../../../../native-base-theme/variables/main';
+
 export default {
   headerText: {
     color: 'white',
@@ -12,5 +14,8 @@ export default {
   },
   listItem: {
     marginLeft: 0,
+  },
+  container: {
+    marginTop: STATUSBAR_HEIGHT,
   },
 };

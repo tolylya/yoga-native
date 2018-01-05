@@ -71,7 +71,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={styles.container}>
         <Header>
           <Text style={styles.headerText}>{this.state.tabName}</Text>
         </Header>
