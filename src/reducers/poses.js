@@ -1,20 +1,14 @@
 export const initialState = {
-  favorites: [],
-  selectedPose: null,
+  favorites: {},
 };
 
 export default function posesReducer(state = initialState, action) {
   switch (action.type) {
-    case 'MARK_AS_FAVORITE': {
-      const favorites = [...state.favorites];
-      favorites.push(action.payload);
-      return { ...state, favorites };
-    }
+    case 'MARK_AS_FAVORITE':
+      return { ...state, favorites: { ...state.favorites, [action.payload]: true } };
 
-    case 'REMOVE_FROM_FAVORITE': {
-      const favorites = [...state.favorites].filter(item => item !== action.payload);
-      return { ...state, favorites };
-    }
+    case 'REMOVE_FROM_FAVORITE':
+      return { ...state, favorites: { ...state.favorites, [action.payload]: false } };
 
     case 'persist/REHYDRATE': {
       return initialState;

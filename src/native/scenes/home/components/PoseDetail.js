@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
+import {
+  Container, Content, Card, CardItem, Thumbnail, Text, Left, Body, Right, Button, Separator,
+  ListItem,
+} from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import Colors from '../../../../../native-base-theme/variables/commonColor';
 import { markAsFavorite, removeFromFavorite } from '../../../../actions/poses';
 
-const { brandInfo, brandDanger } = Colors;
+const { brandInfo, brandDanger, brandSuccess } = Colors;
 
 const mapStateToProps = state => ({
   selectedPose: state.poses.selectedPose,
@@ -20,57 +23,18 @@ const mapDispatchToProps = {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class PoseDetail extends Component {
-  renderAdvantages = () => {
-    return this.props.pose.advantages.map((item) => {
-      return (
-        <CardItem key={item.key} style={{ paddingTop: 2, paddingBottom: 2 }}>
-          <Left>
-            <Icon size={20} name="md-add" color={brandInfo} />
-            <Text style={{ fontSize: 13, color: brandInfo }}>{item.title}</Text>
-          </Left>
-        </CardItem>
-      );
-    });
-  };
-
-  renderDisadvantages = () => {
-    return this.props.pose.disadvantages.map((item) => {
-      return (
-        <CardItem key={item.key} style={{ paddingTop: 2, paddingBottom: 2 }}>
-          <Left>
-            <Icon size={20} name="md-remove" color={brandDanger} />
-            <Text style={{ fontSize: 13, color: brandDanger }}>{item.title}</Text>
-          </Left>
-        </CardItem>
-      );
-    });
-  };
-
-  renderInfluenceOnBody = () => {
-    return this.props.pose.disadvantages.map((item) => {
-      return (
-        <CardItem key={item.key} style={{ paddingTop: 2, paddingBottom: 2 }}>
-          <Left>
-            <Icon size={20} name="ios-body" color={brandInfo} />
-            <Text style={{ fontSize: 13, color: brandInfo }}>{item.title}</Text>
-          </Left>
-        </CardItem>
-      );
-    });
-  };
-
   renderFavoriteButton = () => {
     const { pose } = this.props;
-    if (this.props.favorites.includes(pose.key)) {
+    if (this.props.favorites[pose.key]) {
       return (
         <Button transparent onPress={() => { this.props.removeFromFavorite(pose.key); }}>
-          <Icon size={20} name="ios-star" color={brandInfo} />
+          <Icon size={30} name="ios-star" color={brandInfo} />
         </Button>
       );
     }
     return (
       <Button transparent onPress={() => { this.props.markAsFavorite(pose.key); }}>
-        <Icon size={20} name="ios-star-outline" />
+        <Icon size={30} name="ios-star-outline" />
       </Button>
     );
   };
@@ -97,12 +61,32 @@ class PoseDetail extends Component {
             <CardItem>
               <Body>
                 <Image source={pose.image} style={{ height: 200, width: '100%', flex: 1 }} />
+                <View style={{ width: '100%', marginTop: 6 }}>
+                  <Text note style={{ textAlign: 'center' }}>
+                    {pose.sanskritName}
+                  </Text>
+                </View>
                 <Text style={{ marginTop: 10 }}>{pose.description}</Text>
               </Body>
             </CardItem>
-            {this.renderAdvantages()}
-            {this.renderDisadvantages()}
-            {this.renderInfluenceOnBody()}
+            <Separator>
+              <Text style={{ fontSize: 15, color: brandInfo }}>Модификации для начинающих</Text>
+            </Separator>
+            <ListItem>
+              <Text>{pose.modifications}</Text>
+            </ListItem>
+            <Separator>
+              <Text style={{ fontSize: 15, color: brandSuccess }}>Польза</Text>
+            </Separator>
+            <ListItem>
+              <Text>{pose.benefit}</Text>
+            </ListItem>
+            <Separator>
+              <Text style={{ fontSize: 15, color: brandDanger }}>Противопоказания</Text>
+            </Separator>
+            <ListItem>
+              <Text>{pose.contraindications}</Text>
+            </ListItem>
           </Card>
         </Content>
       </Container>
